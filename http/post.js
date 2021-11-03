@@ -50,24 +50,24 @@ export default async function httpPost(path, dynamo, event) {
           isSendEmail: { BOOL: isSendEmail },
           isSendLine: { BOOL: isSendLine },
           urlKey: { S: urlKey },
-          idempotency_key: { S: idempotencyKey },
-          payment_status: { S: String(paymentStatus) },
-          payment_order_id: { S: paymentOrderId },
-          payment_source_type: { S: paymentSourceType },
-          has_picture: { BOOL: false },
-          is_delete: { BOOL: false },
-          create_at: { S: createAt },
-          update_at: { S: createAt },
+          idempotencyKey: { S: idempotencyKey },
+          paymentStatus: { S: String(paymentStatus) },
+          paymentOrderId: { S: paymentOrderId },
+          paymentSourceType: { S: paymentSourceType },
+          hasPicture: { BOOL: false },
+          isDelete: { BOOL: false },
+          createAt: { S: createAt },
+          updateAt: { S: createAt },
         };
 
         await dynamo
-          .updateItem({
+          .putItem({
             TableName,
             Item,
           })
           .promise();
 
-        body = `POST order ${pk} ${sk}`;
+        body = `POST put item order ${pk} ${sk}`;
       }
       break;
   }
