@@ -1,6 +1,7 @@
 import { TableName } from "../config";
 
 export default async function httpDelete(path, dynamo, event) {
+  const { pk, sk } = event.pathParameters;
   let body;
   switch (path) {
     case "DELETE  /{pk}/{sk}":
@@ -8,12 +9,12 @@ export default async function httpDelete(path, dynamo, event) {
         .deleteItem({
           TableName,
           Key: {
-            PK: { S: event.pathParameters.pk },
-            SK: { S: event.pathParameters.sk },
+            PK: { S: pk },
+            SK: { S: sk },
           },
         })
         .promise();
-      body = `Deleted item ${event.pathParameters.pk}`;
+      body = `Deleted item ${pk} ${sk}`;
       break;
   }
   return body;
