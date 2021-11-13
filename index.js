@@ -1,7 +1,7 @@
-import httpGet from "./http/get";
-import httpPost from "./http/post";
-import httpPut from "./http/put";
-import httpDelete from "./http/delete";
+const httpGet = require("./http/get");
+const httpPost = require("./http/post");
+const httpPut = require("./http/put");
+const httpDelete = require("./http/delete");
 
 const accessKeyId = process.env.ACCESS_KEY_ID;
 const secretAccessKey = process.env.SECRET_ACCESS_KEY;
@@ -18,6 +18,7 @@ exports.handler = async (event, context) => {
 
   try {
     const [httpMethod, path] = event.routeKey.split(" ")[0];
+    console.log(`HttpMethod: ${httpMethod} Path: ${path}`);
 
     switch (httpMethod) {
       case "GET":

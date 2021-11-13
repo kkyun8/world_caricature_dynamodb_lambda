@@ -1,6 +1,7 @@
-import { TableName } from "../config";
+const config = require("../config");
+const { TableName } = config;
 
-export default async function httpGet(path, dynamo, event) {
+module.exports = async (path, dynamo, event) => {
   const { pk, sk } = event.pathParameters;
   let body;
   let params;
@@ -57,7 +58,23 @@ export default async function httpGet(path, dynamo, event) {
         })
         .promise();
       break;
-    case "/{pk}/begins-with/{sk}":
+    case "/{pk}/begins-with/{sk}": {
+      const params = {
+        TableName,
+        KeyConditionExpression: "#pk = :pk and begins_with(#sk, :sk)",
+        ExpressionAttributeNames: {
+          "#pk": "PK",
+          "#sk": "SK",
+        },
+        ExpressionAttributeValues: {
+          ":pk": { S: pk },
+          ":sk": { S: sk },
+        },
+      };
+      body = await dynamo.query(params).promise();
+      break;
+    },
+    case "/begins-with/{sk}":
       {
         const params = {
           TableName,
@@ -73,8 +90,7 @@ export default async function httpGet(path, dynamo, event) {
         };
         body = await dynamo.query(params).promise();
       }
-
       break;
   }
   return body;
-}
+};

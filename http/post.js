@@ -1,12 +1,7 @@
-import {
-  TableName,
-  productKey,
-  logKey,
-  logInfoKey,
-  logErrorKey,
-} from "../config";
+const config = require("../config");
+const { TableName, productKey, logKey, logInfoKey, logErrorKey } = config;
 
-export default async function httpPost(path, dynamo, event) {
+module.exports = async (path, dynamo, event) => {
   const { pk, sk } = event.pathParameters;
   let body;
 
@@ -184,4 +179,4 @@ export default async function httpPost(path, dynamo, event) {
       break;
   }
   return body;
-}
+};

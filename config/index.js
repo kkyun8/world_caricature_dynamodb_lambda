@@ -1,7 +1,9 @@
-export const TableName = "world-caricature-dev";
-export const productKey = "@PRODUCT@";
-export const logKey = "@LOG@";
-export const logInfoKey = "@INFO@";
-export const logErrorKey = "@ERROR@";
-export const artistsKey = "@ARTIST@";
-export const articleKey = "@ARTICLE@";
+exports = {
+  TableName: "world-caricature-dev",
+  productKey: "@PRODUCT@",
+  logKey: "@LOG@",
+  logInfoKey: "@INFO@",
+  logErrorKey: "@ERROR@",
+  artistsKey: "@ARTIST@",
+  articleKey: "@ARTICLE@",
+};

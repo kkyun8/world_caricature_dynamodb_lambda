@@ -1,6 +1,7 @@
-import { TableName } from "../config";
+const config = require("../config");
+const { TableName } = config;
 
-export default async function httpPut(path, dynamo, event) {
+module.exports = async (path, dynamo, event) => {
   const { pk, sk } = event.pathParameters;
   let body;
   let params;
@@ -126,4 +127,4 @@ export default async function httpPut(path, dynamo, event) {
       break;
   }
   return body;
-}
+};

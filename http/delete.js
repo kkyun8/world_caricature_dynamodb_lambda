@@ -1,6 +1,7 @@
-import { TableName } from "../config";
+const config = require("../config");
+const { TableName } = config;
 
-export default async function httpDelete(path, dynamo, event) {
+module.exports = async (path, dynamo, event) => {
   const { pk, sk } = event.pathParameters;
   let body;
   switch (path) {
@@ -18,4 +19,4 @@ export default async function httpDelete(path, dynamo, event) {
       break;
   }
   return body;
-}
+};
