@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
   };
 
   try {
-    const [httpMethod, path] = event.routeKey.split(" ")[0];
+    const [httpMethod, path] = event.routeKey.split(" ");
     console.log(`HttpMethod: ${httpMethod} Path: ${path}`);
 
     switch (httpMethod) {

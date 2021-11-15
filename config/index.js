@@ -1,9 +1,7 @@
-exports = {
-  TableName: "world-caricature-dev",
-  productKey: "@PRODUCT@",
-  logKey: "@LOG@",
-  logInfoKey: "@INFO@",
-  logErrorKey: "@ERROR@",
-  artistsKey: "@ARTIST@",
-  articleKey: "@ARTICLE@",
-};
+exports.TableName = "world-caricature-dev";
+exports.productKey = "@PRODUCT@";
+exports.logKey = "@LOG@";
+exports.logInfoKey = "@INFO@";
+exports.logErrorKey = "@ERROR@";
+exports.artistsKey = "@ARTIST@";
+exports.articleKey = "@ARTICLE@";

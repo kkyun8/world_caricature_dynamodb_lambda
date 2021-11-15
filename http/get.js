@@ -1,4 +1,4 @@
-const config = require("../config");
+const config = require("../config/index");
 const { TableName } = config;
 
 module.exports = async (path, dynamo, event) => {
@@ -58,22 +58,24 @@ module.exports = async (path, dynamo, event) => {
         })
         .promise();
       break;
-    case "/{pk}/begins-with/{sk}": {
-      const params = {
-        TableName,
-        KeyConditionExpression: "#pk = :pk and begins_with(#sk, :sk)",
-        ExpressionAttributeNames: {
-          "#pk": "PK",
-          "#sk": "SK",
-        },
-        ExpressionAttributeValues: {
-          ":pk": { S: pk },
-          ":sk": { S: sk },
-        },
-      };
-      body = await dynamo.query(params).promise();
+    case "/{pk}/begins-with/{sk}":
+      {
+        const params = {
+          TableName,
+          KeyConditionExpression: "#pk = :pk and begins_with(#sk, :sk)",
+          ExpressionAttributeNames: {
+            "#pk": "PK",
+            "#sk": "SK",
+          },
+          ExpressionAttributeValues: {
+            ":pk": { S: pk },
+            ":sk": { S: sk },
+          },
+        };
+        body = await dynamo.query(params).promise();
+      }
       break;
-    },
+
     case "/begins-with/{sk}":
       {
         const params = {
